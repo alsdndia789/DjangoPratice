@@ -1,0 +1,14 @@
+{% load static %}
+{% load bootstrap4 %}
+<div xmlns="http://www.w3.org/1999/html">
+  {% for imagefile in imagefiles %}
+  <div class="item" style="padding-top: 15px;">
+    <p style="text-align: left; font-size: 0.8em;">
+
+    <h4>title : {{imagefile.title}}</h4>
+    <img src="{{ imagefile.imgfile.url }}" style="width: 180px; height: 150px;" alt=""> <br>
+    <h6>context : {{imagefile.content}}</h6>
+    {% endfor %}
+  </div>
+  </p>
+</div>
