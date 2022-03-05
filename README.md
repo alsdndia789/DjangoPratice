@@ -1,0 +1,2 @@
+# DjangoPratice
+nope
