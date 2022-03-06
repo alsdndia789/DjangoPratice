@@ -1,11 +1,16 @@
+{% extends 'base.html' %}
 {% load static %}
 {% load bootstrap4 %}
-<div class="container">
+{% block content %}
+<br>
+<div class="container px-4 px-lg-5">
   <form method="POST" action="{% url 'imageupload' %}" enctype="multipart/form-data">{% csrf_token %}
-      <input type="text" id="title" placeholder="title" name="title"><br>
-      <input type="file" id="imgfile" name="imgfile" accept="image/*" onchange="loadFile(this)"><br>
-      <input type="date" id="date" name="date"><br>
-    <button type="submit" class="btn btn-small" value="제출">제출</button>
+    <input type="text" id="title" placeholder="title" name="title"><br>
+    <input class="btn btn-small" type="file" id="imgfile" name="imgfile" accept="image/*" onchange="loadFile(this)"><br>
+    <input type="date" id="date" name="date"><br>
+    <br>
+    <button type="submit" class="btn btn-dark" value="제출">제출</button>
+    <button class="btn btn-dark"><a href="/" style="text-decoration:none; color:white;">뒤로가기</a></button>
   </form>
-  <button class="btn"><a href="/">뒤로가기</a></button>
 </div>
+{% endblock %}
