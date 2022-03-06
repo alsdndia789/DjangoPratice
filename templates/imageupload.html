@@ -1,12 +1,11 @@
-
 {% load static %}
 {% load bootstrap4 %}
-{% block content %}
 <div class="container">
-    <form method="POST" action="{% url 'imageupload' %}" enctype="multipart/form-data">
-        {% csrf_token %}
-        {% bootstrap_form imageuploadForm %}
-        <input type="submit" class="btn btn-primary col-12" value="제출">
-    </form>
+  <form method="POST" action="{% url 'imageupload' %}" enctype="multipart/form-data">{% csrf_token %}
+      <input type="text" id="title" placeholder="title" name="title"><br>
+      <input type="file" id="imgfile" name="imgfile" accept="image/*" onchange="loadFile(this)"><br>
+      <input type="date" id="date" name="date"><br>
+    <button type="submit" class="btn btn-small" value="제출">제출</button>
+  </form>
+  <button class="btn"><a href="/">뒤로가기</a></button>
 </div>
-{% endblock%}
