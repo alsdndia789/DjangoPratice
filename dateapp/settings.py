@@ -17,7 +17,6 @@ import django_heroku
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -41,8 +40,7 @@ INSTALLED_APPS = [
     'mainpage.apps.MainConfig',
     'bootstrap4',
     'storages',
-
-]
+    ]
 
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -75,14 +73,13 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'dateapp.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
         "ENGINE": config("ENGINE"),
-        "NAME": BASE_DIR/config("NAME"),
+        "NAME": BASE_DIR / config("NAME"),
     }
 }
 # Password validation
@@ -103,7 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -117,7 +113,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -127,7 +122,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 
 DATE_INPUT_FORMATS = ['%d-%m-%Y']
 # Default primary key field type

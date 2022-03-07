@@ -52,6 +52,7 @@ def overview(request):
         'd_day': d_day,
         'imagefiles': imagefiles
     }
+
     return render(request, 'overview.html', context)
 
 

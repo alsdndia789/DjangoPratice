@@ -24,9 +24,6 @@ H
 static/css/bootstrap.css,4\2\42191ef3d936ed2bda6993a73206de85ff961151
 E
 static/css/styles.css,f\f\ff5f6247d17a4d94e3cf2aed570cdefe538f01e5
-:
-
-.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 T
 $static/fonts/feather/css/feather.css,0\7\07764571729a4a87bc755df77b7cebd0d130e89f
 @
