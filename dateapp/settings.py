@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 from decouple import config
 import django_heroku
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -141,3 +142,5 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 DEFAULT_FILE_STORAGE = 'dateapp.asset_storage.MediaStorage'
+
+DATABASES['default'].update(dj_database_url.config(conn_max_age=500))
