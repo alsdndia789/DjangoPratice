@@ -2,7 +2,6 @@
 {% block content %}
 <br>
 <div class="container px-4 px-lg-5">
-<div class="container px-4 px-lg-5">
   <form method="POST" action="{% url 'imageupload' %}" enctype="multipart/form-data">{% csrf_token %}
     <input type="text" id="title" placeholder="제목" name="title"><br><br>
     <input type="date" id="date" name="date"><br><br>
@@ -12,6 +11,5 @@
     <button type="submit" class="btn btn-dark" value="제출">등록하기</button>
     <button class="btn btn-dark"><a href="/" style="text-decoration:none; color:white;">뒤로가기</a></button>
   </form>
-</div>
 </div>
 {% endblock content %}

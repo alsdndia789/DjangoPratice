@@ -1,24 +1,4 @@
 
-_
-/staticfiles/admin/js/admin/DateTimeShortcuts.js,4\e\4e7600fe1651a00f6ec05881b0618eff548da596
-b
-2staticfiles/admin/js/admin/RelatedObjectLookups.js,d\a\dae315096e88f5327c6f8c3e3db042044ba788ac
-l
-<staticfiles/admin/js/admin/DateTimeShortcuts.5548f99471bf.js,8\f\8f21c0a7520880136a9e7382bf52029708a7922f
-o
-?staticfiles/admin/js/admin/RelatedObjectLookups.b4d76b6aaf0b.js,b\7\b7ffe771ea3566b76aaa654f216c7e8faa533950
-\
-,staticfiles/admin/js/vendor/jquery/jquery.js,5\7\577c2556febe3b95dab7377be0a40622e1e999dc
-^
-.staticfiles/admin/js/vendor/jquery/LICENSE.txt,c\1\c13f3ea677cb5b4b3d0b670f0abd87ea81d2337f
-`
-0staticfiles/admin/js/vendor/jquery/jquery.min.js,2\b\2bb2d856fba689c65c2663c6c81badc3c32fb126
-i
-9staticfiles/admin/js/vendor/jquery/jquery.23c7c5d2d131.js,0\e\0ee70b2d3fddbea8d70c6d665646af624a2b70f0
-k
-;staticfiles/admin/js/vendor/jquery/LICENSE.75308107741f.txt,7\9\7956fff682f52cd7d252c1f8842626450db9b53b
-m
-=staticfiles/admin/js/vendor/jquery/jquery.min.dc5e7f18c8d3.js,d\4\d4f1a8b4bea4352d7923b3df1a838e1442810b0c
 :
 
 db.sqlite3,9\0\907ac5e500f6286c18519bf943721af4c97e50d5
@@ -40,3 +20,20 @@ S
 #mainpage/migrations/0001_initial.py,6\a\6aabdd0abfc451eb4c8f3ced2028df9bafe790de
 D
 mainpage/__init__.py,c\6\c6e04675de16b2b19e9890a49047a39448238c95
+H
+static/css/bootstrap.css,4\2\42191ef3d936ed2bda6993a73206de85ff961151
+E
+static/css/styles.css,f\f\ff5f6247d17a4d94e3cf2aed570cdefe538f01e5
+:
+
+.gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
+T
+$static/fonts/feather/css/feather.css,0\7\07764571729a4a87bc755df77b7cebd0d130e89f
+?
+dateapp/urls.py,f\c\fc2b32b8ddaf2fe50dd2df98497f3cda42822f3c
+@
+mainpage/apps.py,a\b\abcc08eb8e349caa2729c603e55e1de8887112b7
+[
++static/assets/fonts/feather/css/feather.css,3\c\3c70cb3a91327cf34dd31f7617d84f25bfa1fc40
+k
+;static/assets/fonts/fontawesome/css/fontawesome-all.min.css,6\f\6f13b7ccb074383ef0660e8c27acc06ac41ea696

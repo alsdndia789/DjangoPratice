@@ -3,7 +3,8 @@ from .views import *
 
 urlpatterns = [
     path('', overview, name="overview"),
-    path('imageupload/', imageUpload, name="imageupload"),
-    path('imagedelete/<int:pk>/remove/', imagedelete, name="imagedelete"),
-    path('imagedetail/<int:pk>/', imagedetail, name="imagedetail"),
+    path('imageupload/', image_upload, name="imageupload"),
+    path('imagedelete/<int:pk>/remove/', image_delete, name="imagedelete"),
+    path('imagedetail/<int:pk>/', image_detail, name="imagedetail"),
+    path('todolist/', todo_list_page, name="todolist"),
 ]

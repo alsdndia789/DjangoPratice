@@ -8,30 +8,29 @@
                                style="object-fit: fill; width: 100%; height: 500px;"
                                src="./static/KakaoTalk_20220306_213856614.jpg" alt="..."/></div>
     <div class="col-lg-5">
-      <div class="feather icon-heart m-0 text-center" style="color:red; right-margin:1px; font-size:120px;">
-       <span style="color:black;">+{{d_day}}</span>
+      <em style="color:red; font-size:140px; font-style:normal;">♡</em>
+      <span style="color:black; font-size:140px">+{{d_day}}</span>
+    </div>
+  </div>
+<!-- Call to Action-->
+<div class="card text-white bg-secondary my-5 py-4 text-center">
+  <div class="card-body"><p class="text-white m-0">민우와 우진이의 추억이 저장된 곳 입니다!!</p></div>
+</div>
+<!-- Content Row-->
+<div class="row gx-4 gx-lg-5">
+  {% for imagefile in imagefiles %}
+  <div class="col-md-4 mb-5">
+    <div class="card h-100">
+      <div class="card-body" style="overflow: hidden;">
+        <img src="{{ imagefile.imgfile.url }}" style="width: 100%; height: auto; object-fit: fill;" alt=""> <br>
+      </div>
+      <div class="card-footer">
+        <a class="btn btn-primary btn-sm" href="/imagedetail/{{imagefile.id}}">More Info</a>
+        <a class="btn btn-primary btn-sm" href="/imagedelete/{{imagefile.id}}/remove">삭제하기</a>
       </div>
     </div>
   </div>
-  <!-- Call to Action-->
-  <div class="card text-white bg-secondary my-5 py-4 text-center">
-    <div class="card-body"><p class="text-white m-0">민우와 우진이의 추억이 저장된 곳 입니다!!</p></div>
-  </div>
-  <!-- Content Row-->
-  <div class="row gx-4 gx-lg-5">
-    {% for imagefile in imagefiles %}
-    <div class="col-md-4 mb-5">
-      <div class="card h-100">
-        <div class="card-body" style="overflow: hidden;">
-          <img src="{{ imagefile.imgfile.url }}" style="width: 100%; height: auto; object-fit: fill;" alt=""> <br>
-        </div>
-        <div class="card-footer">
-          <a class="btn btn-primary btn-sm" href="/imagedetail/{{imagefile.id}}">More Info</a>
-          <a class="btn btn-primary btn-sm" href="/imagedelete/{{imagefile.id}}/remove">삭제하기</a>
-        </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
+  {% endfor %}
+</div>
 </div>
 {% endblock content %}
