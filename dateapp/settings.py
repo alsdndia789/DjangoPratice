@@ -28,7 +28,8 @@ DEBUG = config("DEBUG")
 ALLOWED_HOSTS = [
     'localhost',
     '.ap-northeast-2.compute.amazonaws.com',
-]
+    '52.79.166.231'
+    ]
 
 # Application definition
 
