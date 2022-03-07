@@ -29,8 +29,6 @@ E
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
 T
 $static/fonts/feather/css/feather.css,0\7\07764571729a4a87bc755df77b7cebd0d130e89f
-?
-dateapp/urls.py,f\c\fc2b32b8ddaf2fe50dd2df98497f3cda42822f3c
 @
 mainpage/apps.py,a\b\abcc08eb8e349caa2729c603e55e1de8887112b7
 [
