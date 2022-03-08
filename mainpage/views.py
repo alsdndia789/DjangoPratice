@@ -1,5 +1,6 @@
 import os
 # Create your views here.
+import boto3
 from django.shortcuts import render, redirect
 
 from dateapp import settings
@@ -17,7 +18,12 @@ def image_detail(request, pk):
 
 def image_delete(request, pk):
     image = ImageUpload.objects.get(pk=pk)
-    os.remove(os.path.join(settings.MEDIA_ROOT, str(image.imgfile)))
+    s3_client = boto3.client(
+        's3',
+        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+    )
+    s3_client.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=os.path.join('media', str(image.imgfile)))
     image.delete()
     return redirect('/')
 
