@@ -3,8 +3,7 @@
 {% load my_filter %}
 <br>
 <div class="container px-4 px-lg-5">
-  <form method="POST">
-    {% csrf_token %}
+  <form method="POST">{% csrf_token %}
     <div class="mb-4">
       <div>
         <h5 class="title"> 앞으로 할 일 </h5>
@@ -35,30 +34,30 @@
       <div class="col-12">할일을 추가하자</div>
       {% endif %}
     </div>
+    {% if todo_list|done %}
     <hr>
     <div class="mb-4">
-      <div class="my-2">
-        {% if todo_list|done %}
-        <div>
-          <h5 class="title"> 한 일 </h5>
-        </div>
-        {% for todo in todo_list|done %}
-        <div style="font-size:20px;">
-          <input class="form-check-input" type="checkbox" value="{{todo.id}}" id="done_delete_list"
-                 name="done_delete_list">
-          <label class="form-check-label" for="done_delete_list">
-            {{todo.title}}
-          </label>
-        </div>
-        <p>
-          {% endfor %}
-        <div>
-          <button type=submit class="btn btn-dark" value="not_done" name="not_done"> not done</button>
-          <button type=submit class="btn btn-dark" value="done_delete" name="done_delete"> delete</button>
-        </div>
-        {% endif %}
+      <div>
+        <h5 class="title"> 한 일 </h5>
+        <br>
       </div>
+      {% for todo in todo_list|done %}
+      <div style="font-size:20px;">
+        <input class="form-check-input" type="checkbox" value="{{todo.id}}" id="done_delete_list"
+               name="done_delete_list">
+        <label class="form-check-label" for="done_delete_list">
+          {{todo.title}}
+        </label>
+      </div>
+      <p>
+        {% endfor %}
+      <div>
+        <button type=submit class="btn btn-dark" value="not_done" name="not_done"> not done</button>
+        <button type=submit class="btn btn-dark" value="done_delete" name="done_delete"> delete</button>
+      </div>
+      {% endif %}
     </div>
   </form>
+</div>
 </div>
 {% endblock content %}

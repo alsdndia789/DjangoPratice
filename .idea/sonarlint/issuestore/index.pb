@@ -51,17 +51,3 @@ C
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302
-A
-mainpage/views.py,9\0\90012057c5062857c4c740025cf57166143df310
-C
-templates/base.html,d\a\da7c237b85a69c00a9ab8c189bf63e22070fcac3
-C
-dateapp/settings.py,5\f\5f844900fe3831f95a8a704bf8138a02243cd832
-8
-Procfile,b\c\bc3c68e880d1a01632bce79f69dd1387c7ba9c54
-K
-templates/image_detail.html,0\7\0723451a944180a18dadb977ee95ec8881f2d8ff
-G
-templates/overview.html,3\4\34442b3702ed524602fc8fd8211bd35169f74e28
-H
-templates/todo_list.html,f\0\f0adafa1d82be9d85d085c560e49704e6b0f5bf7
