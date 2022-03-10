@@ -18,8 +18,6 @@ D
 mainpage/__init__.py,c\6\c6e04675de16b2b19e9890a49047a39448238c95
 H
 static/css/bootstrap.css,4\2\42191ef3d936ed2bda6993a73206de85ff961151
-E
-static/css/styles.css,f\f\ff5f6247d17a4d94e3cf2aed570cdefe538f01e5
 T
 $static/fonts/feather/css/feather.css,0\7\07764571729a4a87bc755df77b7cebd0d130e89f
 @
@@ -30,14 +28,10 @@ k
 ;static/assets/fonts/fontawesome/css/fontawesome-all.min.css,6\f\6f13b7ccb074383ef0660e8c27acc06ac41ea696
 G
 templates/page-404.html,6\7\676b90ab6c332d6ad93ca3e60625d78ce1ccf1d9
-@
-mainpage/urls.py,1\f\1fa5af72619b36af9d8246ab6853162c33b122f8
 R
 "mainpage/templatetags/my_filter.py,c\a\cae20c6545952b81efacb84f7c4e381fe7c43be0
 Q
 !mainpage/templatetags/__init__.py,e\1\e18873183bcb22add0291ddb5892361889587040
-B
-mainpage/models.py,8\4\8403f7fce03d5c8075e1c940fe5ca7ad76e8712b
 K
 templates/image_upload.html,7\1\715d2cf81232f39813ceb38c2240e1ef481c14c1
 9
@@ -46,8 +40,6 @@ H
 dateapp/asset_storage.py,f\7\f73fa02c822f57a0f813d989763caf32861feb13
 C
 dateapp/runtime.txt,5\a\5a70e1e52d86d908bb9dafb344dd4dcabe7f9c12
-?
-dateapp/urls.py,f\c\fc2b32b8ddaf2fe50dd2df98497f3cda42822f3c
 :
 
 .gitignore,a\5\a5cc2925ca8258af241be7e5b0381edf30266302

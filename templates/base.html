@@ -28,7 +28,9 @@
         <li class="nav-item"><a class="nav-link {% if 'todolist' in url_name %} active {% endif %}"
                                 aria-current="{% if 'todolist' in url_name %} page {% endif %}"
                                 href="/todolist/">ToDo list</a></li>
-        <li class="nav-item"><a class="nav-link" href="#!">Services</a></li>
+        <li class="nav-item"><a class="nav-link {% if 'imagebydate' in url_name %} active {% endif %}"
+                                aria-current="{% if 'imagebydate' in url_name %} page {% endif %}"
+                                href="/imagebydate/">날짜별 사진</a></li>
         <li class="nav-item"><a class="nav-link {% if 'imageupload' in url_name %} active {% endif %}"
                                 aria-current="{% if 'imageupload' in url_name %} page {% endif %}"
                                 href="/imageupload/">사진 추가</a></li>

@@ -28,7 +28,6 @@ DEBUG = config("DEBUG")
 
 ALLOWED_HOSTS = ['127.0.0.1', '.herokuapp.com']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,7 +40,7 @@ INSTALLED_APPS = [
     'mainpage.apps.MainConfig',
     'bootstrap4',
     'storages',
-    ]
+]
 
 MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -71,7 +70,9 @@ TEMPLATES = [
         },
     },
 ]
-
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.template.context_processors.request',
+)
 WSGI_APPLICATION = 'dateapp.wsgi.application'
 
 # Database

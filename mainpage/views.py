@@ -109,3 +109,8 @@ def todo_list_page(request):
         "todo_list": todo_list
     }
     return render(request, 'todo_list.html', data)
+
+
+def image_by_date(request):
+
+    return render(request, 'image_by_date.html')

@@ -7,4 +7,5 @@ urlpatterns = [
     path('imagedelete/<int:pk>/remove/', image_delete, name="imagedelete"),
     path('imagedetail/<int:pk>/', image_detail, name="imagedetail"),
     path('todolist/', todo_list_page, name="todolist"),
+    path('imagebydate/', image_by_date, name="imagebydate"),
 ]
