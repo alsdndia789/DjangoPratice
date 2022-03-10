@@ -1,4 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
+<br>
+<div class="container px-4 px-lg-5">
+  <form method="POST"> {% csrf_token %}
+    <input type="date" id="date" name="date" value={{date}}>
+    <button type="submit" class="btn btn-dark" value="제출">검색</button>
+  </form>
 
+  <div class="row gx-4 gx-lg-5">
+    {% for imagefile in imagefiles %}
+    <div class="col-md-4 mb-5">
+      <div class="card h-100">
+        <div class="card-body" style="overflow: hidden;">
+          <img src="https://woojinminwoo-image.s3.ap-northeast-2.amazonaws.com/media/{{ imagefile.imgfile }}"
+               style="width: 100%; height: auto; object-fit: fill;" alt=""> <br>
+        </div>
+        <div class="card-footer">
+          <a class="btn btn-primary btn-sm" href="/imagedetail/{{imagefile.id}}">More Info</a>
+          <a class="btn btn-primary btn-sm" href="/imagedelete/{{imagefile.id}}/remove">삭제하기</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock content %}

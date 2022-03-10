@@ -32,8 +32,6 @@ R
 "mainpage/templatetags/my_filter.py,c\a\cae20c6545952b81efacb84f7c4e381fe7c43be0
 Q
 !mainpage/templatetags/__init__.py,e\1\e18873183bcb22add0291ddb5892361889587040
-K
-templates/image_upload.html,7\1\715d2cf81232f39813ceb38c2240e1ef481c14c1
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 H

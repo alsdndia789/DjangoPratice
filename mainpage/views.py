@@ -1,5 +1,6 @@
 import os
 # Create your views here.
+
 import boto3
 from django.shortcuts import render, redirect
 
@@ -112,5 +113,11 @@ def todo_list_page(request):
 
 
 def image_by_date(request):
+    date = request.POST.get('date', datetime.date.today().strftime("%Y-%m-%d"))
+    imagefiles = ImageUpload.objects.filter(date=date)
 
-    return render(request, 'image_by_date.html')
+    data = {
+        'date': date,
+        'imagefiles': imagefiles,
+    }
+    return render(request, 'image_by_date.html', data)
