@@ -1,2 +1,2 @@
 # DjangoPratice
-nope
+Develop for Django Pratice.
