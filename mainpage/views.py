@@ -1,7 +1,5 @@
 import os
 
-# Create your views here.
-
 import boto3
 from django.shortcuts import render, redirect
 
@@ -72,15 +70,14 @@ class HandleImage:
         return data
 
 
-
 def image_by_date(request):
     data = HandleImage().by_date(request)
-    return render(request, "image_by_date.html", data)
+    return render(request, "image/image_by_date.html", data)
 
 
 def image_detail(request, pk):
     data = HandleImage().detail(pk)
-    return render(request, "image_detail.html", data)
+    return render(request, "image/image_detail.html", data)
 
 
 def image_delete(request, pk):
@@ -115,7 +112,7 @@ def image_upload(request):
         imageupload.save()
         return redirect("/")
     except:
-        return render(request, "image_upload.html")
+        return render(request, "image/image_upload.html")
 
 
 class HandleTodoList:
