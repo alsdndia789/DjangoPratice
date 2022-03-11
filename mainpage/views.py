@@ -10,26 +10,80 @@ from .models import ImageUpload, TodoList
 import datetime
 
 
-def image_detail(request, pk):
-    image = ImageUpload.objects.get(pk=pk)
-    data = {
-        "image": image,
+def start():
+    return datetime.date(2022, 2, 26)
+
+
+def today():
+    return datetime.date.today()
+
+
+def calculate_d_day():
+    return (today() - start()).days + 1
+
+
+def overview(request):
+    imagefiles = ImageUpload.objects.all()
+    d_day = calculate_d_day()
+
+    context = {
+        "d_day": d_day,
+        "imagefiles": imagefiles
     }
+
+    return render(request, "overview.html", context)
+
+
+class HandleImage:
+    def __init__(self):
+        self.image = ImageUpload.objects.all()
+
+    def sort_by_id(self, pk):
+        return self.image.get(pk=pk)
+
+    def detail(self, pk):
+        return {"image": self.sort_by_id(pk)}
+
+    def delete(self, pk):
+        image = self.sort_by_id(pk)
+        s3_client = boto3.client(
+            "s3",
+            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
+            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+        )
+        s3_client.delete_object(
+            Bucket=settings.AWS_STORAGE_BUCKET_NAME,
+            Key=os.path.join("media", str(image.imgfile)),
+        )
+        image.delete()
+
+    def sort_by_date(self, date):
+        return self.image.filter(date=date)
+
+    def by_date(self, request):
+        date = request.POST.get("date", today().strftime("%Y-%m-%d"))
+        show_all_date = self.image.values("date").distinct()
+
+        data = {
+            "date": date,
+            "imagefiles": self.sort_by_date(date),
+            "show_all_date": show_all_date
+        }
+        return data
+
+
+def image_by_date(request):
+    data = HandleImage().by_date(request)
+    return render(request, "image_by_date.html", data)
+
+
+def image_detail(request, pk):
+    data = HandleImage().detail(pk)
     return render(request, "image_detail.html", data)
 
 
 def image_delete(request, pk):
-    image = ImageUpload.objects.get(pk=pk)
-    s3_client = boto3.client(
-        "s3",
-        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-    )
-    s3_client.delete_object(
-        Bucket=settings.AWS_STORAGE_BUCKET_NAME,
-        Key=os.path.join("media", str(image.imgfile)),
-    )
-    image.delete()
+    HandleImage().delete(pk)
     return redirect("/")
 
 
@@ -63,22 +117,31 @@ def image_upload(request):
         return render(request, "image_upload.html")
 
 
-def start():
-    return datetime.date(2022, 2, 26)
+class HandleTodoList:
+    def __init__(self):
+        self.todo_list = TodoList.objects.all()
 
+    def add(self, value):
+        try:
+            todo_list_upload = TodoList(title=value)
+            todo_list_upload.save()
+            return redirect("/todolist")
 
-def today():
-    return datetime.date.today()
+        except:
+            return redirect("page-404.html")
 
+    def delete(self, lists):
+        for item in lists:
+            self.todo_list.get(pk=item).delete()
 
-def overview(request):
-    imagefiles = ImageUpload.objects.all()
-    today_date = today()
-    start_date = start()
-    d_day = (today_date - start_date).days + 1
-    context = {"d_day": d_day, "imagefiles": imagefiles}
+    def move(self, lists):
+        for item in lists:
+            todo_list = self.todo_list.get(pk=item)
+            todo_list.done = True if not todo_list.done else False
+            todo_list.save()
 
-    return render(request, "overview.html", context)
+    def data(self):
+        return {"todo_list": self.todo_list}
 
 
 def todo_list_parsed_data(request):
@@ -105,32 +168,6 @@ def todo_list_parsed_data(request):
     return parsed_data
 
 
-class HandleTodoList:
-    def __init__(self):
-        self.todo_list = TodoList.objects.all()
-
-    def add(self, value):
-        try:
-            todo_list_upload = TodoList(title=value,)
-            todo_list_upload.save()
-            return redirect("/todolist")
-        except:
-            return redirect("page-404.html")
-
-    def delete(self, lists):
-        for item in lists:
-            self.todo_list.get(pk=item).delete()
-
-    def move(self, lists):
-        for item in lists:
-            todo_list = self.todo_list.get(pk=item)
-            todo_list.done = True if not todo_list.done else False
-            todo_list.save()
-
-    def data(self):
-        return {"todo_list": self.todo_list}
-
-
 def todo_list_page(request):
     parsed_data = todo_list_parsed_data(request)
 
@@ -152,14 +189,3 @@ def todo_list_page(request):
     data = HandleTodoList().data()
 
     return render(request, "todo_list.html", data)
-
-
-def image_by_date(request):
-    date = request.POST.get("date", today().strftime("%Y-%m-%d"))
-    imagefiles = ImageUpload.objects.filter(date=date)
-
-    data = {
-        "date": date,
-        "imagefiles": imagefiles,
-    }
-    return render(request, "image_by_date.html", data)

@@ -2,6 +2,9 @@
 {% block content %}
 <br>
 <div class="container px-4 px-lg-5">
+  <div>
+    날짜 리스트: {% for item in show_all_date %} {{item.date|date:"Y-m-d"}} , {% endfor %}
+  </div>
   <form method="POST"> {% csrf_token %}
     <input type="date" id="date" name="date" value={{date}}>
     <button type="submit" class="btn btn-dark" value="제출">검색</button>
@@ -16,8 +19,8 @@
                style="width: 100%; height: auto; object-fit: fill;" alt=""> <br>
         </div>
         <div class="card-footer">
-          <a class="btn btn-primary btn-sm" href="/imagedetail/{{imagefile.id}}">More Info</a>
-          <a class="btn btn-primary btn-sm" href="/imagedelete/{{imagefile.id}}/remove">삭제하기</a>
+          <a class="btn btn-primary btn-sm" href="/imagedetail/{{imagefile.id}}">Detail</a>
+          <a class="btn btn-primary btn-sm" href="/imagedelete/{{imagefile.id}}/remove">Delete</a>
         </div>
       </div>
     </div>
