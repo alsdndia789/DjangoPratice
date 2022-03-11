@@ -1,4 +1,5 @@
 import os
+
 # Create your views here.
 
 import boto3
@@ -12,112 +13,153 @@ import datetime
 def image_detail(request, pk):
     image = ImageUpload.objects.get(pk=pk)
     data = {
-        'image': image,
+        "image": image,
     }
-    return render(request, 'image_detail.html', data)
+    return render(request, "image_detail.html", data)
 
 
 def image_delete(request, pk):
     image = ImageUpload.objects.get(pk=pk)
     s3_client = boto3.client(
-        's3',
+        "s3",
         aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
         aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
     )
-    s3_client.delete_object(Bucket=settings.AWS_STORAGE_BUCKET_NAME, Key=os.path.join('media', str(image.imgfile)))
+    s3_client.delete_object(
+        Bucket=settings.AWS_STORAGE_BUCKET_NAME,
+        Key=os.path.join("media", str(image.imgfile)),
+    )
     image.delete()
-    return redirect('/')
+    return redirect("/")
+
+
+def image_parsed_data(request):
+    title = request.POST.get("title")
+    date = request.POST.get("date")
+    content = request.POST.get("content")
+    imagefile = request.FILES.get("imgfile", False)
+
+    parsed_data = {
+        "title": title,
+        "date": date,
+        "content": content,
+        "imagefile": imagefile,
+    }
+    return parsed_data
 
 
 def image_upload(request):
-    if request.method == 'POST':
-        title = request.POST['title']
-        date = request.POST['date']
-        content = request.POST['content']
-        imagefile = request.FILES.get('imgfile', False)
-        imageupload = ImageUpload(
-            title=title,
-            imgfile=imagefile,
-            date=date,
-            content=content,
-        )
-        try:
-            imageupload.save()
-            return redirect('/')
-        except:
-            return render(request, 'page-404.html')
-    else:
-        return render(request, 'image_upload.html')
+    parsed_data = image_parsed_data(request)
+    imageupload = ImageUpload(
+        title=parsed_data["title"],
+        imgfile=parsed_data["imagefile"],
+        date=parsed_data["date"],
+        content=parsed_data["content"],
+    )
+    try:
+        imageupload.save()
+        return redirect("/")
+    except:
+        return render(request, "image_upload.html")
+
+
+def start():
+    return datetime.date(2022, 2, 26)
+
+
+def today():
+    return datetime.date.today()
 
 
 def overview(request):
     imagefiles = ImageUpload.objects.all()
-    today_date = datetime.date.today()
-    start_date = datetime.date(2022, 2, 26)
+    today_date = today()
+    start_date = start()
     d_day = (today_date - start_date).days + 1
-    context = {
-        'd_day': d_day,
-        'imagefiles': imagefiles
+    context = {"d_day": d_day, "imagefiles": imagefiles}
+
+    return render(request, "overview.html", context)
+
+
+def todo_list_parsed_data(request):
+    context = request.POST.get("context")
+    delete_list = request.POST.getlist("delete_list")
+    done_delete_list = request.POST.getlist("done_delete_list")
+    done_delete = request.POST.get("done_delete")
+    not_done = request.POST.get("not_done")
+    delete = request.POST.get("delete")
+    done = request.POST.get("done")
+    add = request.POST.get("add")
+
+    parsed_data = {
+        "context": context,
+        "delete_list": delete_list,
+        "done_delete_list": done_delete_list,
+        "done_delete": done_delete,
+        "not_done": not_done,
+        "delete": delete,
+        "done": done,
+        "add": add,
     }
 
-    return render(request, 'overview.html', context)
+    return parsed_data
+
+
+class HandleTodoList:
+    def __init__(self):
+        self.todo_list = TodoList.objects.all()
+
+    def add(self, value):
+        try:
+            todo_list_upload = TodoList(title=value,)
+            todo_list_upload.save()
+            return redirect("/todolist")
+        except:
+            return redirect("page-404.html")
+
+    def delete(self, lists):
+        for item in lists:
+            self.todo_list.get(pk=item).delete()
+
+    def move(self, lists):
+        for item in lists:
+            todo_list = self.todo_list.get(pk=item)
+            todo_list.done = True if not todo_list.done else False
+            todo_list.save()
+
+    def data(self):
+        return {"todo_list": self.todo_list}
 
 
 def todo_list_page(request):
-    if request.method == 'POST':
-        title = request.POST.get('title')
-        delete_list = request.POST.getlist("delete_list")
-        done_delete_list = request.POST.getlist("done_delete_list")
-        done_delete = request.POST.get("done_delete")
-        not_done = request.POST.get("not_done")
-        delete = request.POST.get("delete")
-        done = request.POST.get("done")
-        add = request.POST.get("add")
+    parsed_data = todo_list_parsed_data(request)
 
-        todo_list_upload = TodoList(
-            title=title,
-        )
-        if add == "add":
-            try:
-                todo_list_upload.save()
-                return redirect('/todolist')
-            except:
-                return render(request, 'page-404.html')
+    if parsed_data["add"] == "add":
+        HandleTodoList().add(parsed_data["context"])
 
-        if delete == "delete":
-            for item in delete_list:
-                TodoList.objects.get(pk=item).delete()
+    if parsed_data["delete"] == "delete":
+        HandleTodoList().delete(parsed_data["delete_list"])
 
-        if done_delete == "done_delete":
-            for item in done_delete_list:
-                TodoList.objects.get(pk=item).delete()
+    if parsed_data["done_delete"] == "done_delete":
+        HandleTodoList().delete(parsed_data["done_delete_list"])
 
-        if done == "done":
-            for item in delete_list:
-                todo_list = TodoList.objects.get(pk=item)
-                todo_list.done = True
-                todo_list.save()
-                print(TodoList.objects.get(pk=item).done)
+    if parsed_data["done"] == "done":
+        HandleTodoList().move(parsed_data["delete_list"])
 
-        if not_done == "not_done":
-            for item in done_delete_list:
-                todo_list = TodoList.objects.get(pk=item)
-                todo_list.done = False
-                todo_list.save()
+    if parsed_data["not_done"] == "not_done":
+        HandleTodoList().move(parsed_data["done_delete_list"])
 
-    todo_list = TodoList.objects.all()
-    data = {
-        "todo_list": todo_list
-    }
-    return render(request, 'todo_list.html', data)
+    data = HandleTodoList().data()
+
+    return render(request, "todo_list.html", data)
 
 
 def image_by_date(request):
-    date = request.POST.get('date', datetime.date.today().strftime("%Y-%m-%d"))
+    date = request.POST.get("date", today().strftime("%Y-%m-%d"))
     imagefiles = ImageUpload.objects.filter(date=date)
 
     data = {
-        'date': date,
-        'imagefiles': imagefiles,
+        "date": date,
+        "imagefiles": imagefiles,
     }
-    return render(request, 'image_by_date.html', data)
+    return render(request, "image_by_date.html", data)
