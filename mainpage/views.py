@@ -22,18 +22,6 @@ def calculate_d_day():
     return (today() - start()).days + 1
 
 
-def overview(request):
-    imagefiles = ImageUpload.objects.all()
-    d_day = calculate_d_day()
-
-    context = {
-        "d_day": d_day,
-        "imagefiles": imagefiles
-    }
-
-    return render(request, "overview.html", context)
-
-
 class HandleImage:
     def __init__(self):
         self.image = ImageUpload.objects.all()
@@ -70,6 +58,18 @@ class HandleImage:
             "show_all_date": show_all_date
         }
         return data
+
+
+def overview(request):
+    imagefiles = HandleImage().__init__()
+    d_day = calculate_d_day()
+
+    context = {
+        "d_day": d_day,
+        "imagefiles": imagefiles
+    }
+
+    return render(request, "overview.html", context)
 
 
 def image_by_date(request):
