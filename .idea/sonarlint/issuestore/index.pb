@@ -49,7 +49,3 @@ H
 templates/todo_list.html,f\0\f0adafa1d82be9d85d085c560e49704e6b0f5bf7
 G
 templates/page-404.html,6\7\676b90ab6c332d6ad93ca3e60625d78ce1ccf1d9
-R
-"templates/image/image_by_date.html,4\d\4dde06e5dcc68cb23d035f6cbd84917c2e2a17d3
-B
-mainpage/models.py,8\4\8403f7fce03d5c8075e1c940fe5ca7ad76e8712b

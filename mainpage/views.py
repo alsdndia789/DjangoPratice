@@ -21,7 +21,7 @@ def calculate_d_day():
 
 
 def overview(request):
-    imagefiles = ImageUpload.objects.all()
+    imagefiles = ImageUpload.objects.all().order_by('-date')
     d_day = calculate_d_day()
 
     context = {
@@ -34,7 +34,7 @@ def overview(request):
 
 class HandleImage:
     def __init__(self):
-        self.image = ImageUpload.objects.all()
+        self.image = ImageUpload.objects.all().order_by('date')
 
     def sort_by_id(self, pk):
         return self.image.get(pk=pk)
